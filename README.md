@@ -20,7 +20,7 @@ Idempotent ingestion and reconciliation of station transfer events.
 
 ```bash
 npm install
-make run          # or: npm run start:dev
+npm run start:dev
 ```
 
 Server starts at `http://localhost:3000`.  
@@ -29,14 +29,14 @@ OpenAPI docs at `http://localhost:3000/api`.
 ## Run tests
 
 ```bash
-make test         # or: npm test
+npm test
+docker compose run --rm --build test
 ```
 
 ## Run with Docker
 
 ```bash
-docker compose up --build          # start the API
-docker compose run --rm app npm test   # run tests inside container
+docker compose up --build
 ```
 
 ---

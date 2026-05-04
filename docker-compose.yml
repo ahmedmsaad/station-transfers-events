@@ -17,6 +17,12 @@ services:
       db:
         condition: service_healthy
 
+  test:
+    build:
+      context: .
+      target: builder
+    command: npm test
+
   db:
     image: postgres:16-alpine
     environment:

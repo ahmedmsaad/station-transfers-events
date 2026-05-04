@@ -20,11 +20,21 @@ Idempotent ingestion and reconciliation of station transfer events.
 
 ```bash
 npm install
+cp .env.example .env
 npm run start:dev
 ```
 
 Server starts at `http://localhost:3000`.  
 OpenAPI docs at `http://localhost:3000/api`.
+
+## Switch storage backend
+
+You can switch between the two storage approaches using `STORE_TYPE` in `.env`:
+
+- `STORE_TYPE=memory` → uses in-memory storage (`MemoryStore`)
+- `STORE_TYPE=postgres` → uses PostgreSQL storage (`PostgresStore`)
+
+`src/store/store.module.ts` selects the implementation at startup based on this value.
 
 ## Run tests
 
@@ -124,7 +134,7 @@ With `STORE_TYPE=postgres`, `PostgresStore.init()` runs `CREATE TABLE IF NOT EXI
 ```
 src/store/store.interface.ts   ← defines StoreInterface
 src/store/memory.store.ts      ← in-memory impl
-src/store/store.module.ts      ← provides STORE_TOKEN; swap useClass here to change backend
+src/store/store.module.ts      ← provides STORE_TOKEN and picks backend via STORE_TYPE
 ```
 
-To plug in a SQLite or Postgres store, implement `StoreInterface` and change `useClass` in `store.module.ts`.
+To plug in a SQLite or another DB store, implement `StoreInterface` and register it in `store.module.ts`.

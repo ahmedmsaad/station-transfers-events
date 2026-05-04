@@ -8,8 +8,8 @@ export class TransfersService {
 
   constructor(@Inject(STORE_TOKEN) private readonly store: StoreInterface) {}
 
-  ingest(dto: CreateTransferBatchDto) {
-    const result = this.store.insertEvents(dto.events);
+  async ingest(dto: CreateTransferBatchDto) {
+    const result = await this.store.insertEvents(dto.events);
     this.logger.log(`Batch: inserted=${result.inserted} duplicates=${result.duplicates}`);
     return result;
   }

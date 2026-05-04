@@ -114,6 +114,10 @@ The entire batch is rejected with HTTP 400 if **any** event fails validation. Re
 
 `events_count` counts **all stored events for the station regardless of status**. This provides a complete audit trail. `total_approved_amount` already scopes the financial total to `status == "approved"`.
 
+### Postgres schema bootstrap (no migration runner)
+
+With `STORE_TYPE=postgres`, `PostgresStore.init()` runs `CREATE TABLE IF NOT EXISTS transfer_events (...)` on startup instead of applying separate migration files. That is intentional: it keeps the project simple and gives a friction-free local and Docker Compose setup (no extra migration command or tooling). When the schema needs to evolve safely across environments, its better to replace this with versioned migrations.
+
 ### Store interface (swappable port)
 
 ```

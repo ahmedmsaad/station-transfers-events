@@ -20,6 +20,6 @@ export interface IngestResult {
 }
 
 export interface StoreInterface {
-  insertEvents(events: TransferEvent[]): IngestResult;
-  getStationSummary(stationId: string): StationSummary | null;
+  insertEvents(events: TransferEvent[]): Promise<IngestResult>;
+  getStationSummary(stationId: string): Promise<StationSummary | null>;
 }

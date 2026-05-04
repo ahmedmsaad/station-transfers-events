@@ -15,7 +15,7 @@ export class MemoryStore implements StoreInterface {
    * tick, so no two requests can interleave inside this method.
    * See README for the multi-process caveat.
    */
-  insertEvents(events: TransferEvent[]): IngestResult {
+  async insertEvents(events: TransferEvent[]): Promise<IngestResult> {
     let inserted = 0;
     let duplicates = 0;
 
@@ -31,7 +31,7 @@ export class MemoryStore implements StoreInterface {
     return { inserted, duplicates };
   }
 
-  getStationSummary(stationId: string): StationSummary | null {
+  async getStationSummary(stationId: string): Promise<StationSummary | null> {
     const stationEvents = [...this.events.values()].filter(
       (e) => e.station_id === stationId,
     );

@@ -112,7 +112,8 @@ The entire batch is rejected with HTTP 400 if **any** event fails validation. Re
 
 ### events_count definition
 
-`events_count` counts **all stored events for the station regardless of status**. This provides a complete audit trail. `total_approved_amount` already scopes the financial total to `status == "approved"`.
+`events_count`counts all stored events for the station regardless of status, providing a complete audit trail. This can act as a red flag—for example, if a station has a high number of events but a low number of approved ones—and also offers useful insights into station activity levels, helping the business identify where actions or scaling efforts may be needed.
+`total_approved_amount` already scopes the financial total to `status == "approved"`.
 
 ### Postgres schema bootstrap (no migration runner)
 
